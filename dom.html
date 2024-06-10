@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="demo"></p>
+
+<script>
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.open("GET", "base.xml", false);
+xmlhttp.send();
+var xml = xmlhttp.responseXML;
+
+var cds = xml.getElementsByTagName("cd");
+var titlesText = "";
+
+for (var i = 0; i < cds.length; i++) {
+    var title = cds[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
+    titlesText += title + "<br>";
+}
+document.getElementById("demo").innerHTML = titlesText;
+</script>
+
+</body>
+</html>

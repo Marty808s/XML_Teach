@@ -1,0 +1,22 @@
+<html>
+    <p id="demo"></p>
+    <script>
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", "bookstore.xml", true);
+        xmlhttp.send();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var xmlDoc = this.responseXML;
+                var xpath = "bookstore/book[price>35]/title";
+                var result = xmlDoc.evaluate(xpath, xmlDoc, null, XPathResult.ANY_TYPE, null);
+                var node = result.iterateNext();
+                var textContent = "";
+                while (node) {
+                    textContent += node.textContent + "<br>";
+                    node = result.iterateNext();
+                }
+                document.getElementById("demo").innerHTML = textContent;
+            }
+        };
+    </script>
+</html>
